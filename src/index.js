@@ -1,18 +1,15 @@
+// src/index.js
 const express = require('express');
+const dotenv = require('dotenv');
+const healthyRoutes = require('./routes/healthy');
+
+dotenv.config();
+
 const app = express();
+const PORT = process.env.PORT || 3000;
 
-app.get('/healthy', (req, res) => {
-    res.status(200).json({
-      health: 'live',
-      status: 200,
-      message: 'ok'
-    });
-  });
+app.use('/', healthyRoutes);
 
-app.listen(3000, (err, res) => {
-    if (err) {
-        console.log(err);
-    } else {
-        console.log("Server is running on port 3000");
-    }
+app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
 });
