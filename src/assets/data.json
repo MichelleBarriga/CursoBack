@@ -448,5 +448,14 @@
       "expiration": "2025-05-31",
       "discount": "0",
       "id": "50"
+    },
+    {
+      "name": "Prueba",
+      "brand": "Dove",
+      "stock": "800",
+      "batch": "2020-0050",
+      "expiration": "2025-05-31",
+      "discount": "0",
+      "id": "51"
     }
   ]

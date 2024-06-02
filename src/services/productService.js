@@ -12,7 +12,14 @@ const getAllProducts = () => products;
 
 const getProductById = (id) => products.find(product => product.id === id);
 
+const addProduct = (product) => {
+  products.push(product);
+  saveData();
+};
+
 module.exports = {
     getAllProducts,
     getProductById,
+    addProduct,
+    
   };

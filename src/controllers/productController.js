@@ -14,8 +14,15 @@ const getProductById = (req, res) => {
   }
 };
 
+const addProduct = (req, res) => {
+  const newProduct = req.body;
+  productService.addProduct(newProduct);
+  res.status(201).json(newProduct);
+};
+
 module.exports = {
     getAllProducts,
     getProductById,
+    addProduct,
     
   };
