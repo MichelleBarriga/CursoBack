@@ -29,10 +29,20 @@ const updateProduct = (req, res) => {
   }
 };
 
+const deleteProduct = (req, res) => {
+  const deletedProduct = productService.deleteProduct(req.params.id);
+  if (deletedProduct) {
+    res.json(deletedProduct);
+  } else {
+    res.status(404).json({ message: 'Product not found' });
+  }
+};
+
 module.exports = {
     getAllProducts,
     getProductById,
     addProduct,
     updateProduct,
+    deleteProduct,
     
   };

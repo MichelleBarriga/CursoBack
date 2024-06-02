@@ -27,10 +27,21 @@ const updateProduct = (id, updatedProduct) => {
   return null;
 };
 
+const deleteProduct = (id) => {
+  const index = products.findIndex(product => product.id === id);
+  if (index !== -1) {
+    const deletedProduct = products.splice(index, 1);
+    saveData();
+    return deletedProduct;
+  }
+  return null;
+};
+
 module.exports = {
     getAllProducts,
     getProductById,
     addProduct,
     updateProduct,
+    deleteProduct,
     
   };
