@@ -10,6 +10,9 @@ const saveData = () => {
 
 const getAllProducts = () => products;
 
+const getProductById = (id) => products.find(product => product.id === id);
+
 module.exports = {
-    getAllProducts
+    getAllProducts,
+    getProductById,
   };
