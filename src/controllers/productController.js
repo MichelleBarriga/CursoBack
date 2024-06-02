@@ -38,11 +38,21 @@ const deleteProduct = (req, res) => {
   }
 };
 
+const partialUpdateProduct = (req, res) => {
+  const updatedProduct = productService.updateProduct(req.params.id, req.body);
+  if (updatedProduct) {
+    res.json(updatedProduct);
+  } else {
+    res.status(404).json({ message: 'Product not found' });
+  }
+};
+
 module.exports = {
     getAllProducts,
     getProductById,
     addProduct,
     updateProduct,
     deleteProduct,
+    partialUpdateProduct,
     
   };
