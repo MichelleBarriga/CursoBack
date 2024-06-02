@@ -17,9 +17,20 @@ const addProduct = (product) => {
   saveData();
 };
 
+const updateProduct = (id, updatedProduct) => {
+  const index = products.findIndex(product => product.id === id);
+  if (index !== -1) {
+    products[index] = { ...products[index], ...updatedProduct };
+    saveData();
+    return products[index];
+  }
+  return null;
+};
+
 module.exports = {
     getAllProducts,
     getProductById,
     addProduct,
+    updateProduct,
     
   };

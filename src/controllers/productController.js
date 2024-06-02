@@ -20,9 +20,19 @@ const addProduct = (req, res) => {
   res.status(201).json(newProduct);
 };
 
+const updateProduct = (req, res) => {
+  const updatedProduct = productService.updateProduct(req.params.id, req.body);
+  if (updatedProduct) {
+    res.json(updatedProduct);
+  } else {
+    res.status(404).json({ message: 'Product not found' });
+  }
+};
+
 module.exports = {
     getAllProducts,
     getProductById,
     addProduct,
+    updateProduct,
     
   };
