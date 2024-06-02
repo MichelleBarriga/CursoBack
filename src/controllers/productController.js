@@ -47,6 +47,11 @@ const partialUpdateProduct = (req, res) => {
   }
 };
 
+const filterProducts = (req, res) => {
+  const filteredProducts = productService.filterProducts(req.body.filter);
+  res.json(filteredProducts);
+};
+
 module.exports = {
     getAllProducts,
     getProductById,
@@ -54,5 +59,5 @@ module.exports = {
     updateProduct,
     deleteProduct,
     partialUpdateProduct,
-    
+    filterProducts
   };

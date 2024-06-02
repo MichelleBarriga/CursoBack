@@ -37,11 +37,39 @@ const deleteProduct = (id) => {
   return null;
 };
 
+const filterProducts = (filter) => {
+  return products.filter(product => {
+    let valid = true;
+    if (filter.brand) {
+      valid = valid && product.brand === filter.brand;
+    }
+    if (filter.stockover) {
+      valid = valid && product.stock >= filter.stockover;
+    }
+    if (filter.stockbelow) {
+      valid = valid && product.stock <= filter.stockbelow;
+    }
+    if (filter.discountover) {
+      valid = valid && product.discount >= filter.discountover;
+    }
+    if (filter.discountbelow) {
+      valid = valid && product.discount <= filter.discountbelow;
+    }
+    if (filter.expireover) {
+      valid = valid && new Date(product.expiryDate) >= new Date(filter.expireover);
+    }
+    if (filter.expirebelow) {
+      valid = valid && new Date(product.expiryDate) <= new Date(filter.expirebelow);
+    }
+    return valid;
+  });
+};
+
 module.exports = {
     getAllProducts,
     getProductById,
     addProduct,
     updateProduct,
     deleteProduct,
-    
+    filterProducts
   };
