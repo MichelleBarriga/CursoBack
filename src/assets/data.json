@@ -450,5 +450,13 @@
     "expiration": "2025-05-31",
     "discount": "0",
     "id": "50"
+  },
+  {
+    "name": "Nuevo Producto",
+    "brand": "Marca Ejemplo",
+    "price": 99.99,
+    "stock": 50,
+    "discount": 0.15,
+    "expireDate": "2024-12-31"
   }
 ]

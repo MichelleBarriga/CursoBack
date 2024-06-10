@@ -1,8 +1,13 @@
 const productService = require('../services/productService');
 
-const getAllProducts = (req, res) => {
-  const products = productService.getAllProducts();
-  res.json(products);
+const getAllProducts = async (req, res) => {
+  try {
+    const products = await productService.getAllProducts();
+    res.json(products);
+  } catch (error) {
+    console.error('Error fetching products:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
 };
 
 const getProductById = (req, res) => {

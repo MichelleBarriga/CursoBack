@@ -1,75 +1,67 @@
-const fs = require('fs');
-const path = require('path');
+const Product = require('../models/product');
 
-const dataFilePath = path.join(__dirname, '../assets/data.json');
-let products = require(dataFilePath);
-
-const saveData = () => {
-  fs.writeFileSync(dataFilePath, JSON.stringify(products, null, 2));
-};
-
-const getAllProducts = () => products;
-
-const getProductById = (id) => products.find(product => product.id === id);
-
-const addProduct = (product) => {
-  products.push(product);
-  saveData();
-};
-
-const updateProduct = (id, updatedProduct) => {
-  const index = products.findIndex(product => product.id === id);
-  if (index !== -1) {
-    products[index] = { ...products[index], ...updatedProduct };
-    saveData();
-    return products[index];
+const getAllProducts = async () => {
+  try {
+    console.log('Fetching all products...');
+    const products = await Product.findAll();
+    console.log('Products fetched:', products);
+    return products;
+  } catch (error) {
+    console.error('Error fetching products:', error);
+    throw error;
   }
-  return null;
 };
 
-const deleteProduct = (id) => {
-  const index = products.findIndex(product => product.id === id);
-  if (index !== -1) {
-    const deletedProduct = products.splice(index, 1);
-    saveData();
-    return deletedProduct;
+
+const getProductById = async (id) => {
+  try {
+    return await Product.findByPk(id);
+  } catch (error) {
+    console.error('Error fetching product:', error);
+    throw error;
   }
-  return null;
 };
 
-const filterProducts = (filter) => {
-  return products.filter(product => {
-    let valid = true;
-    if (filter.brand) {
-      valid = valid && product.brand === filter.brand;
+const addProduct = async (productData) => {
+  try {
+    return await Product.create(productData);
+  } catch (error) {
+    console.error('Error adding product:', error);
+    throw error;
+  }
+};
+
+const updateProduct = async (id, productData) => {
+  try {
+    const product = await Product.findByPk(id);
+    if (product) {
+      return await product.update(productData);
     }
-    if (filter.stockover) {
-      valid = valid && product.stock >= filter.stockover;
+    return null;
+  } catch (error) {
+    console.error('Error updating product:', error);
+    throw error;
+  }
+};
+
+const deleteProduct = async (id) => {
+  try {
+    const product = await Product.findByPk(id);
+    if (product) {
+      await product.destroy();
+      return true;
     }
-    if (filter.stockbelow) {
-      valid = valid && product.stock <= filter.stockbelow;
-    }
-    if (filter.discountover) {
-      valid = valid && product.discount >= filter.discountover;
-    }
-    if (filter.discountbelow) {
-      valid = valid && product.discount <= filter.discountbelow;
-    }
-    if (filter.expireover) {
-      valid = valid && new Date(product.expiryDate) >= new Date(filter.expireover);
-    }
-    if (filter.expirebelow) {
-      valid = valid && new Date(product.expiryDate) <= new Date(filter.expirebelow);
-    }
-    return valid;
-  });
+    return false;
+  } catch (error) {
+    console.error('Error deleting product:', error);
+    throw error;
+  }
 };
 
 module.exports = {
-    getAllProducts,
-    getProductById,
-    addProduct,
-    updateProduct,
-    deleteProduct,
-    filterProducts
-  };
+  getAllProducts,
+  getProductById,
+  addProduct,
+  updateProduct,
+  deleteProduct,
+};
