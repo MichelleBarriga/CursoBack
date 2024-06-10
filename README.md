@@ -5,6 +5,14 @@ Este proyecto es una aplicación web que sigue los pasos de la tarea de un curso
 
 - [Instalación](#instalación)
 - [Uso](#uso)
+- [Endpoints](#endpoints)
+  - [GET /products](#get-products)
+  - [GET /products/:id](#get-products)
+  - [POST /products](#post-products)
+  - [PUT /products/:id](#put-products)
+  - [PATCH /products/:id](#patch-products)
+  - [DELETE /products/:id](#delete-products)
+  - [POST /products/filter](#post-productsfilter)
 - [Autor](#autor)
 - [Licencia](#licencia)
 
@@ -30,6 +38,70 @@ Este proyecto es una aplicación web que sigue los pasos de la tarea de un curso
     ```bash
     npm run dev
     ```
+## Endpoints
+### GET /products
+Obtiene todos los productos.
+
+### GET /products/
+Obtiene un producto específico por su ID.
+
+**Parámetros:**
+
+**id:** ID del producto
+
+### POST /products
+Añade un nuevo producto.
+
+Cuerpo de la Solicitud:
+
+**Formato:** JSON
+**Contenido:** Datos del nuevo producto
+
+### PUT /products/
+Actualiza un producto existente por su ID.
+
+**Parámetros:**
+
+**id:**  ID del producto
+**Cuerpo de la Solicitud:**
+
+**Formato:** JSON
+**Contenido:** Datos actualizados del producto
+
+### PATCH /products/
+Actualiza parcialmente un producto existente por su ID.
+
+**Parámetros:**
+
+**id:** ID del producto
+**Cuerpo de la Solicitud:**
+
+**Formato:** JSON
+**Contenido:** Datos a actualizar del producto
+
+### DELETE /products/
+Elimina un producto por su ID.
+
+**Parámetros:**
+
+**id:** ID del producto
+
+### POST /products/filter
+Filtra productos basados en varios parámetros.
+
+**Cuerpo de la Solicitud:**
+
+**Formato:** JSON
+**Contenido:** Objeto filter con los siguientes campos opcionales:
+
+- **brand:** Marca del producto
+- **stockover:** Stock mayor o igual al valor especificado
+- **stockbelow:** Stock menor o igual al valor especificado
+- **discountover:** Descuento mayor o igual al valor especificado
+- **discountbelow:** Descuento menor o igual al valor especificado
+- **expireover:** Fecha de expiración mayor o igual a la fecha especificada
+- **expirebelow:** Fecha de expiración menor o igual a la fecha especificada
+
 
 ## Autor
 
